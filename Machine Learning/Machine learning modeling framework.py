@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 # Author: Tigflanker
 # Date: 04 Oct 2018
 # 本文将引用Titanic数据源做较为全面的预测建模
@@ -19,7 +19,7 @@ datain = pd.read_csv('D:/Desktop/Projects/Data/titanic/train.csv')
 #datain = pd.read_csv('http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/titanic.txt')
 
 # 1. 数据探索
-def data_exp(datain, y_var = y_var, char_cate_threshold = 10, plt_out = 'data_pre_exp.pdf', plt_show = False):
+def data_exp(datain, y_var = y_var, char_cate_threshold = 10, ext_n = 3, plt_out = 'data_pre_exp.pdf', plt_show = False):
     # 1.1 数据全局印象
     datatp = datain.dtypes
     nume_cols = set(list(datatp[datatp != 'object'].index))
@@ -29,15 +29,17 @@ def data_exp(datain, y_var = y_var, char_cate_threshold = 10, plt_out = 'data_pr
     for x in datain.columns:
         Variable_pre_exp.append(
                     [x
-                         ,'Numeric' if x in nume_cols else 'Character'
-                        ,len(datain[x].value_counts())
-                        ,'%.2f%%' % (len(datain[x].value_counts()) * 100 / datain.shape[0])
-                        ,sum(datain[x].isna())
-                        ,'%.2f%%' % (sum(datain[x].isna()) * 100 / datain.shape[0])
-                        ]
+                     ,'Numeric' if x in nume_cols else 'Character'
+                     ,len(datain[x].value_counts())
+                     ,'%.2f%%' % (len(datain[x].value_counts()) * 100 / datain.shape[0])
+                     ,sum(datain[x].isna())
+                     ,'%.2f%%' % (sum(datain[x].isna()) * 100 / datain.shape[0])
+                     ,0 if x in char_cols else sum((datain[x] < datain[x].mean() - ext_n * datain[x].std()) \
+                                                 | (datain[x] > datain[x].mean() + ext_n * datain[x].std())) 
+                     ]
                 )
 
-    Variable_pre_exp = pd.DataFrame(Variable_pre_exp, columns=['var','var_type','val_cate_n','val_cate_r','na_n','na_r'])
+    Variable_pre_exp = pd.DataFrame(Variable_pre_exp, columns=['var','var_type','val_cate_n','val_cate_r','na_n','na_r','ext_'+str(ext_n)])
     print('>>>>>The preliminary exploration of dataset:<<<<<\n',Variable_pre_exp)
 
     # 1.2 特征分布、阈值¹
@@ -79,7 +81,10 @@ def data_exp(datain, y_var = y_var, char_cate_threshold = 10, plt_out = 'data_pr
 data_exp(datain,plt_out = 'D:/Desktop/Projects/Data/titanic/data_pre_exp.pdf')
 
 # 2. 数据处理 
-# 2.1 极端值处理
+# 2.1 连续型变量离散化或标准化
+
+
+n_std_threshold = 3
 
 # 2.2 缺失值填补
 # 2.3 字符型变量/无序数值型变量独热处理
