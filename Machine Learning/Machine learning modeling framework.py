@@ -6,11 +6,12 @@
 # 0. 导包/宏参设定
 import os
 import pandas as pd 
+import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 import seaborn as sns
-
+from scipy.stats import chi2
 
 y_var = 'Survived'
 
@@ -84,7 +85,48 @@ data_exp(datain,plt_out = 'D:/Desktop/Projects/Data/titanic/data_pre_exp.pdf')
 # 2.1 连续型变量离散化或标准化
 
 
-n_std_threshold = 3
+#n_std_threshold = 3
+def calc_chi2(datain, group = 'order_group', y_var = y_var):
+    N = len(datain)
+    chi2 = 0
+    for g in set(datain[group]):
+        for y in set(datain[y_var]):
+            Agj = sum((datain[group] == g) & (datain[y_var] == y))
+            Egj = sum(datain[group] == g) * sum(datain[y_var] == y) / N
+            chi2 += 0 if Egj == 0 else (Agj - Egj)**2/Egj
+
+    return chi2
+
+data_age = datain[['Survived','Age']].loc[datain.Age.notna()].sort_values(by='Age').reset_index()
+
+data_age['order_group'] = data_age.index
+
+data_age = data_age.loc[:500]
+
+chi2_threshold = np.inf
+group_threshold = 3
+while(len(data_age['order_group'].unique()) > group_threshold):
+    group_list = list(data_age['order_group'].unique())
+    
+    min_chi2 = [0, []]
+    for i in range(len(group_list) - 1):
+        chi2 = calc_chi2(data_age[(data_age.order_group == group_list[i]) | (data_age.order_group == group_list[i + 1])])
+        if (chi2 < min_chi2[0]) | (i == 0):
+            min_chi2 = [chi2, [group_list[i]]]
+        elif chi2 == min_chi2[0]:
+            min_chi2[1].append(group_list[i])
+    
+    def temp_func1(x):
+        if x in min_chi2[1]:
+            x = group_list[group_list.index(x) + 1]
+            while(x in min_chi2[1]):
+                x = group_list[group_list.index(x) + 1]
+        return x 
+    
+    if min_chi2[0] < chi2_threshold:        
+        data_age.loc[:,'order_group'] = list(map(temp_func1,data_age.order_group))
+    else :
+        break
 
 # 2.2 缺失值填补
 # 2.3 字符型变量/无序数值型变量独热处理
