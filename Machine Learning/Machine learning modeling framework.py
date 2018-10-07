@@ -5,6 +5,7 @@
 
 # 0. 导包/宏参设定
 import os
+import re
 import pandas as pd 
 import numpy as np
 import matplotlib as mpl
@@ -84,9 +85,8 @@ data_exp(datain,plt_out = 'D:/Desktop/Projects/Data/titanic/data_pre_exp.pdf')
 # 2. 数据处理 
 # 2.1 连续型变量离散化或标准化
 
-
-#n_std_threshold = 3
-def calc_chi2(datain, group = 'order_group', y_var = y_var):
+# 方差分箱法²³
+def calc_chi2(datain, group = 'x_chi2_group', y_var = y_var):
     N = len(datain)
     chi2 = 0
     for g in set(datain[group]):
@@ -97,36 +97,58 @@ def calc_chi2(datain, group = 'order_group', y_var = y_var):
 
     return chi2
 
-data_age = datain[['Survived','Age']].loc[datain.Age.notna()].sort_values(by='Age').reset_index()
+def chi2_merge(
+    chi2_datain = datain[['Survived','Age']]
+    ,divided_var = 'Age'
+    ,y_var = y_var
+    ,chi2_threshold = np.inf  # 最大方差停止划分阈值，本参数待定
+    ,aim_groups = 3  # 目标组数
+    ,step_size = 5  # 该参数用于定义每次迭代按照最小的N个方差值进行合并，用于提高合并速率，默认1
+    ):
 
-data_age['order_group'] = data_age.index
-
-data_age = data_age.loc[:500]
-
-chi2_threshold = np.inf
-group_threshold = 3
-while(len(data_age['order_group'].unique()) > group_threshold):
-    group_list = list(data_age['order_group'].unique())
+    chi2_datain = chi2_datain.loc[chi2_datain[divided_var].notna()].sort_values(by=divided_var).reset_index()
+    chi2_datain[divided_var + '_chi2_group'] = chi2_datain.index
     
-    min_chi2 = [0, []]
-    for i in range(len(group_list) - 1):
-        chi2 = calc_chi2(data_age[(data_age.order_group == group_list[i]) | (data_age.order_group == group_list[i + 1])])
-        if (chi2 < min_chi2[0]) | (i == 0):
-            min_chi2 = [chi2, [group_list[i]]]
-        elif chi2 == min_chi2[0]:
-            min_chi2[1].append(group_list[i])
+    while(len(chi2_datain[divided_var + '_chi2_group'].unique()) > aim_groups):
+        group_list = list(chi2_datain[divided_var + '_chi2_group'].unique())
+        
+        min_chi2 = {}
+        if len(chi2_datain[divided_var + '_chi2_group'].unique()) <= 10:  # 10以内降速为1，以防跨过目标组数
+            step_size = 1
+        for i in range(len(group_list) - 1):
+            chi2 = calc_chi2(chi2_datain[(chi2_datain[divided_var + '_chi2_group'] == group_list[i]) \
+                                         | (chi2_datain[divided_var + '_chi2_group'] == group_list[i + 1])], group = divided_var + '_chi2_group')  
+            #chi2 = round(chi2, 4)
+            if chi2 in min_chi2:
+                min_chi2[chi2] = min_chi2[chi2] + [group_list[i]]  
+            elif len(min_chi2) < step_size:
+                min_chi2[chi2] = [group_list[i]]  
+            elif chi2 < max(min_chi2):
+                del min_chi2[max(min_chi2)]
+                min_chi2[chi2] = [group_list[i]]
+                
+        if len(min_chi2) < step_size:
+            min_chi2 = {min(min_chi2) : min_chi2[min(min_chi2)]}
+        merge_group_list = set(eval('[' + re.sub('[\[\]]','',str(list(min_chi2.values()))) + ']'))  # 数组扁平化
     
-    def temp_func1(x):
-        if x in min_chi2[1]:
-            x = group_list[group_list.index(x) + 1]
-            while(x in min_chi2[1]):
+        def temp_func1(x):
+            if x in merge_group_list:
                 x = group_list[group_list.index(x) + 1]
-        return x 
+                while(x in merge_group_list):
+                    x = group_list[group_list.index(x) + 1]
+            return x 
+        
+        if max(min_chi2.keys()) < chi2_threshold:        
+            chi2_datain.loc[:,divided_var + '_chi2_group'] = list(map(temp_func1,chi2_datain[divided_var + '_chi2_group']))
+        else :
+            break
+        print('Total variable length',len(chi2_datain),', current groups',len(chi2_datain[divided_var + '_chi2_group'].unique()),', step size',step_size)
     
-    if min_chi2[0] < chi2_threshold:        
-        data_age.loc[:,'order_group'] = list(map(temp_func1,data_age.order_group))
-    else :
-        break
+    chi2_datain = chi2_datain[['index', divided_var + '_chi2_group']]
+    chi2_datain.set_index(['index'], inplace=True)
+    return chi2_datain
+
+chi2_df = chi2_merge()
 
 # 2.2 缺失值填补
 # 2.3 字符型变量/无序数值型变量独热处理
@@ -140,6 +162,9 @@ while(len(data_age['order_group'].unique()) > group_threshold):
 # 4. 模型表现评定
 # 4.1 AUC、F1-Score等评定
 # 4.2 相关图
-# info 
-# info1: https://blog.csdn.net/henbile/article/details/79974037
+
+# ref 
+# ref1: https://blog.csdn.net/henbile/article/details/79974037
+# ref2: https://www.powershow.com/view1/1fa37b-ZDc1Z/ChiMerge_Discretization_powerpoint_ppt_presentation
+# ref3: http://www.aaai.org/Papers/AAAI/1992/AAAI92-019.pdf
 # ⁰¹²³⁴⁵⁶⁷⁸⁹⁽⁾
