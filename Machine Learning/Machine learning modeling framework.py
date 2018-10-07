@@ -85,7 +85,7 @@ data_exp(datain,plt_out = 'D:/Desktop/Projects/Data/titanic/data_pre_exp.pdf')
 # 2. 数据处理 
 # 2.1 连续型变量离散化或标准化
 
-# 方差分箱法²³
+# 卡方分箱法²³
 def calc_chi2(datain, group = 'x_chi2_group', y_var = y_var):
     N = len(datain)
     chi2 = 0
@@ -101,9 +101,9 @@ def chi2_merge(
     chi2_datain = datain[['Survived','Age']]
     ,divided_var = 'Age'
     ,y_var = y_var
-    ,chi2_threshold = np.inf  # 最大方差停止划分阈值，本参数待定
+    ,chi2_threshold = np.inf  # 最大卡方值停止划分阈值，本参数待定
     ,aim_groups = 3  # 目标组数
-    ,step_size = 5  # 该参数用于定义每次迭代按照最小的N个方差值进行合并，用于提高合并速率，默认1
+    ,step_size = 5  # 该参数用于定义每次迭代按照最小的N个卡方值进行合并，用于提高合并速率，默认1
     ):
 
     chi2_datain = chi2_datain.loc[chi2_datain[divided_var].notna()].sort_values(by=divided_var).reset_index()
