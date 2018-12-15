@@ -15,7 +15,6 @@ import seaborn as sns
 y_var = ''  # Y变量
 
 # 0.1 数据导入 
-#datain_test = pd.read_csv('D:\Desktop\数据源\企业端\腾讯企业端匹配数据（聚合后）.csv', encoding='gbk', sep=',',engine='python')
 datain_test = pd.read_csv('http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/titanic.txt')
 #datain = pd.read_csv('~/data/qyhx_jxd.txt', skiprows = [0,1,2], encoding='utf-8', sep='\t')
 
@@ -155,7 +154,6 @@ def data_exp(datain  # 数据入
     return Variable_pre_exp, obs_miss_rate
     
 #Variable_pre_exp = data_exp(datain,plt_out = 'D:/data/kaggle/titanic/data_pre_exp')
-#Variable_pre_exp = data_exp(datain_test,plt_out = 'D:/Desktop/数据源/企业端/aftagg',cross_plt=15,ecd='gbk')
 Variable_pre_exp, obs_miss_rate = data_exp(datain_test,calc_obs_na=True)
 #Variable_pre_exp = data_exp(datain,plt_out = '~/result/qyhx_jxd_exp')
 
