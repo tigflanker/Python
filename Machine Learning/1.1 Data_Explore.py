@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Author: guoyang14
+# Author: tigflanker
 # Date: 12 Dec 2018
 # 数据探索
 
@@ -15,7 +15,7 @@ y_var = ''  # Y变量
 
 # 0.1 数据导入
 datain_test = pd.read_csv(
-    'D:\Desktop\数据源\企业端\腾讯企业端匹配数据（聚合后）.csv', encoding='gbk', sep=',', engine='python')
+    'D:\Desktop\数据源\企业端\train.csv', encoding='gbk', sep=',', engine='python')
 #datain_test = pd.read_csv('http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/titanic.txt')
 #datain = pd.read_csv('~/data/qyhx_jxd.txt', skiprows = [0,1,2], encoding='utf-8', sep='\t')
 
