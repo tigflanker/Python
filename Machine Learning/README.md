@@ -14,7 +14,7 @@
 * 特征筛选：逐步回归
 
 ## 下图为本工具箱的使用流程
-![Process](http://git.jd.com/scf-rm/deng/blob/master/GuoYang/Machine%20learning%20modeling%20framework/images/Process.jpg)
+![Process](https://github.com/tigflanker/Python/blob/master/Machine%20Learning/process.jpg)
 
 ## 更新日志：
 # 29Dec2018
