@@ -1,4 +1,6 @@
 ﻿# Machine learning modeling framework（风控建模工具集）
+ 
+## 声明：本工具箱程序除模型训练部分调用sklearn、画图部分调用scikit-plot、PSI计算引用@H*Yao，其余均为自写。出于应用有限，暂于23Feb19停更
 
 ## 最新Note：
 * MLMF使用说明已初步完成
@@ -18,7 +20,7 @@
 
 ## 更新日志：
 # 29Dec2018
-* 添加特征筛选部分（2.x）：包含特征稳定性（PSI from HuYao）、特征共线性（方差膨胀因子和相关性矩阵）
+* 添加特征筛选部分（2.x）：包含特征稳定性（PSI from *Yao）、特征共线性（方差膨胀因子和相关性矩阵）
 * 1. Data_Explore.py：去除相关性矩阵、对分布图拼接按照4维或9维子图展示 
 * 4.1 Model performance.py：添加准召图
 
