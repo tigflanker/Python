@@ -35,8 +35,8 @@ setup(
     long_description=long_description,  # Optional
     long_description_content_type='text/markdown',  # Optional (see note above)
 
-    url='https://github.com/tigflanker/Python/Risk control modeling framework',  # Optional 
-    author='Tigflanker/deng@jd partner',  # Optional
+    url='https://github.com/tigflanker/Python/tree/master/Risk control modeling framework',  # Optional 
+    author='Tigflanker & deng@jd partners',  # Optional
     author_email='tigflanker@qq.com',  # Optional
 
     classifiers=[  # Optional
@@ -47,7 +47,7 @@ setup(
         'Development Status :: 4 - Beta',
 
         # Indicate who your project is intended for
-        'Intended Audience :: Scorecard builder',
+        'Intended Audience :: Developers',
         # 'Topic :: Other :: Other',
 
         # Pick your license as you wish
@@ -82,7 +82,7 @@ setup(
     # and refuse to install the project if the version does not match. If you
     # do not support Python 2, you can simplify this to '>=3.5' or similar, see
     # https://packaging.python.org/guides/distributing-packages-using-setuptools/#python-requires
-    # python_requires=['numpy','pandas','scipy','matplotlib','seaborn','sklearn','scikitplot','statsmodels'],
+    # python_requires=['numpy','pandas','scipy','matplotlib','seaborn','sklearn','scikit-plot','statsmodels'],
 
     # This field lists other packages that your project depends on to run.
     # Any package you put here will be installed by pip when your project is
@@ -90,7 +90,7 @@ setup(
     #
     # For an analysis of "install_requires" vs pip's requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['numpy','pandas','scipy','matplotlib','seaborn','sklearn','scikitplot','statsmodels'],  # Optional
+    install_requires=['numpy','pandas','scipy','matplotlib','seaborn','sklearn','scikit-plot','statsmodels'],  # Optional
 
     # List additional URLs that are relevant to your project as a dict.
     #
@@ -102,6 +102,6 @@ setup(
     # maintainers, and where to support the project financially. The key is
     # what's used to render the link text on PyPI.
     project_urls={  # Optional
-        'Source': 'https://github.com/tigflanker/Python/Risk control modeling framework/',
+        'Source': 'https://github.com/tigflanker/Python/tree/master/Risk control modeling framework/',
     },
-)
+) 

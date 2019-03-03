@@ -16,8 +16,8 @@
 * 特征筛选：逐步回归
 
 ## 下图为本工具箱的使用流程
-![Process](https://github.com/tigflanker/Python/blob/master/Risk%control%20modeling%20framework/process.jpg)  
-
+![Process](https://github.com/tigflanker/Python/blob/master/Risk%20control%20modeling%20framework/process.jpg)  
+ 
 ## 更新日志：
 # 29Dec2018
 * 添加特征筛选部分（2.x）：包含特征稳定性（PSI from *Yao）、特征共线性（方差膨胀因子和相关性矩阵）
