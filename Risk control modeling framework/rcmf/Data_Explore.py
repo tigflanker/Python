@@ -9,15 +9,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import numpy as np
 import pandas as pd
-pd.set_option('display.max_columns', 500)
-
-y_var = ''  # Y变量
-
-# 0.1 数据导入
-datain_test = pd.read_csv(
-    'D:\Desktop\数据源\企业端\train.csv', encoding='gbk', sep=',', engine='python')
-#datain_test = pd.read_csv('http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/titanic.txt')
-#datain = pd.read_csv('~/data/qyhx_jxd.txt', skiprows = [0,1,2], encoding='utf-8', sep='\t')
+# pd.set_option('display.max_columns', 500)
 
 # 1. 数据探索
 # 返回：
@@ -148,20 +140,28 @@ def Data_Explore(datain  # 数据入
 
     return Variable_pre_exp, obs_miss_rate
 
+# Example:
+if __name__ == '__main__':
 
-#Variable_pre_exp = Data_Explore(datain,plt_out = 'D:/data/kaggle/titanic/data_pre_exp')
-#Variable_pre_exp = Data_Explore(datain_test,plt_out = 'D:/Desktop/数据源/企业端/aftagg',cross_plt=15,ecd='gbk')
-Variable_pre_exp, obs_miss_rate = Data_Explore(
-    datain_test, plt_out='D:/Desktop/xxx')
-#Variable_pre_exp = Data_Explore(datain,plt_out = '~/result/qyhx_jxd_exp')
-
-# 使用
-# 删除缺失率或类别数过高的特征
-# for x in Variable_pre_exp.loc[Variable_pre_exp.sug_drop_cate, 'var']: # Variable_pre_exp.sug_drop_na |
-#    del datain_test[x]
-#
-#Variable_pre_exp = Variable_pre_exp[(~Variable_pre_exp.sug_drop_na) & (~Variable_pre_exp.sug_drop_cate)]\
-#    .reset_index(drop=True).drop(['sug_drop_na', 'sug_drop_cate'], 1)
-
-# 删除缺失率过高的观测
-#datain_test = datain_test[list(obs_miss_rate < 0.9)].reset_index(drop=True)
+    # 0.1 数据导入
+    datain_test = pd.read_csv(
+        'D:\Desktop\数据源\企业端\腾讯企业端匹配数据（聚合后）.csv', encoding='gbk', sep=',', engine='python')
+    #datain_test = pd.read_csv('http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/titanic.txt')
+    #datain = pd.read_csv('~/data/qyhx_jxd.txt', skiprows = [0,1,2], encoding='utf-8', sep='\t')
+    
+    #Variable_pre_exp = Data_Explore(datain,plt_out = 'D:/data/kaggle/titanic/data_pre_exp')
+    #Variable_pre_exp = Data_Explore(datain_test,plt_out = 'D:/Desktop/数据源/企业端/aftagg',cross_plt=15,ecd='gbk')
+    Variable_pre_exp, obs_miss_rate = Data_Explore(
+        datain_test, plt_out='D:/Desktop/xxx')
+    #Variable_pre_exp = Data_Explore(datain,plt_out = '~/result/qyhx_jxd_exp')
+    
+    # 使用
+    # 删除缺失率或类别数过高的特征
+    # for x in Variable_pre_exp.loc[Variable_pre_exp.sug_drop_cate, 'var']: # Variable_pre_exp.sug_drop_na |
+    #    del datain_test[x]
+    #
+    #Variable_pre_exp = Variable_pre_exp[(~Variable_pre_exp.sug_drop_na) & (~Variable_pre_exp.sug_drop_cate)]\
+    #    .reset_index(drop=True).drop(['sug_drop_na', 'sug_drop_cate'], 1)
+    
+    # 删除缺失率过高的观测
+    #datain_test = datain_test[list(obs_miss_rate < 0.9)].reset_index(drop=True)

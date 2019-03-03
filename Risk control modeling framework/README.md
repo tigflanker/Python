@@ -1,4 +1,4 @@
-﻿# Machine learning modeling framework（风控建模工具集）
+﻿# Risk control modeling framework（风控建模工具集）
  
 ## 声明：本工具箱程序除模型训练部分调用sklearn、画图部分调用scikit-plot、PSI计算引用@H*Yao，其余均为自写。出于应用有限，暂于23Feb19停更
 
@@ -16,7 +16,7 @@
 * 特征筛选：逐步回归
 
 ## 下图为本工具箱的使用流程
-![Process](https://github.com/tigflanker/Python/blob/master/Machine%20learning%20modeling%20framework/process.jpg)
+![Process](https://github.com/tigflanker/Python/blob/master/Risk%control%20modeling%20framework/process.jpg)  
 
 ## 更新日志：
 # 29Dec2018
