@@ -29,7 +29,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='rcmf',  # Required
-    version='1.0.1',  # Required
+    version='1.0.4',  # Required
 
     description='A risk control modeling toolbox, include scattered function for building scorecard/machine learn model.',  # Optional
     long_description=long_description,  # Optional
@@ -75,7 +75,7 @@ setup(
     #
     #   py_modules=["my_module"],
     #
-    packages=['RCMF'],  # Required
+    packages=['rcmf'],  # Required
 
     # Specify which Python versions you support. In contrast to the
     # 'Programming Language' classifiers above, 'pip install' will check this
@@ -103,5 +103,6 @@ setup(
     # what's used to render the link text on PyPI.
     project_urls={  # Optional
         'Source': 'https://github.com/tigflanker/Python/tree/master/Risk control modeling framework/',
+        # 'Say Thanks!': 'Thanks to my friends HuYao@jd & JiangChao@jd for their support of this project many times.',
     },
 ) 

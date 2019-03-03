@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: rcmf
-Version: 1.0.1
+Version: 1.0.3
 Summary: A risk control modeling toolbox, include scattered function for building scorecard/machine learn model.
 Home-page: https://github.com/tigflanker/Python/tree/master/Risk control modeling framework
 Author: Tigflanker & deng@jd partners
@@ -9,12 +9,12 @@ License: UNKNOWN
 Project-URL: Source, https://github.com/tigflanker/Python/tree/master/Risk control modeling framework/
 Description: ﻿# Risk control modeling framework（风控建模工具集）
          
-        ## 声明：本工具箱程序除模型训练部分调用sklearn、画图部分调用scikit-plot、PSI计算引用@H*Yao，其余均为自写。出于应用有限，暂于23Feb19停更
+        ## 声明：工具箱为风控建模过程提供支持，因工作紧迫暂于23Feb19停更；感谢jiangchao8@jd & huyao3@jd为这些积累提供若干支持
         
         ## 最新Note：
-        * MLMF使用说明已初步完成
+        * RCMF使用说明已初步完成
         * 2.2.2 Chi2_merge.py模块可以使用，但还需修改
-        * MLMF为各个模块的汇总，使用时调用即可；Example.x为测试实例，可参照（！！实际项目中的特征名和数据等保密信息已做处理！！）
+        * Example.x为测试实例，可参照（！！实际项目中的特征名和数据等保密信息已做处理！！）
         
         ## 需更新：
         * 整个工具箱re-view：包括每个模块其他语言的double-check、每个模块参数名称标准化
@@ -42,7 +42,7 @@ Description: ﻿# Risk control modeling framework（风控建模工具集）
         # 25Jan2019
         * 2.x Collinearity.py：相关性计算部分的热力图展示，可以控制哪些特征用于绘图；例如可以abs(corr) > 0.8的特征，或者是按相关性排序后取前20个特征
         * 3.x PDO_Score_Convert.py：放活odds定义，如不定义，则按照如下规则计算：对train数据集计算ks切点，取切点的百分位点区间内的所有y_label，计算好坏比
-        * MLMF使用说明：完成初版
+        * RCMF使用说明：完成初版
         
 Keywords: scorecard,python,toolbox
 Platform: UNKNOWN

@@ -13,7 +13,7 @@ from rcmf.Model_Performance import Model_Performance
 from rcmf.Data_Sampling import Data_Sampling
 from rcmf.Data_Distribution import Data_Distribution
 
-__version__ = '1.0.1'
+__version__ = '1.0.3'
 
 __all__ = (
     Data_Explore,
