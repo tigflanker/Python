@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: rcmf
-Version: 1.0.3
+Version: 1.0.4
 Summary: A risk control modeling toolbox, include scattered function for building scorecard/machine learn model.
 Home-page: https://github.com/tigflanker/Python/tree/master/Risk control modeling framework
 Author: Tigflanker & deng@jd partners
