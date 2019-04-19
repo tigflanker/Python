@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 # Author: tigflanker
 # Date: 31 Oct 2018
-# Update: 04 Nov 2018：增加过采样 
-# 抽样
+# Update: 04 Nov 2018：Add oversampling function 
 
 import re
 import pandas as pd 
@@ -22,11 +21,11 @@ def Data_Sampling(datain,
                   group_by = ''
                   ): 
 
-    # 复制至最终数据集 
+    # Copy to final output dataset. 
     sample_out = datain.copy()
-    os_times = 0 # 初始化过采样轮数 
+    os_times = 0 # Initialize rounds of oversampling.
     
-    # 分层抽样子宏 
+    # Sub-macro for stratified sampling.
     def stratify_sample(sample_set_in = 'sample_out', 
                         stratify_n = 'stratify_by[1]', 
                         _stratify_by = 'stratify_by[0]', 
@@ -43,10 +42,10 @@ def Data_Sampling(datain,
             _bkt_n[x%stratify_n] += 1
     
         keep_index = list(map(_stra, _bkt_n))
-        keep_index = eval('[' + re.sub('[\[\]]','',str(keep_index)) + ']')  # 数组扁平化
+        keep_index = eval('[' + re.sub('[\[\]]','',str(keep_index)) + ']')  # list flattening
         while (type(stratify_rule) is not float) and (sum(keep_index) != stratify_rule):
             keep_index = list(map(_stra, _bkt_n))
-            keep_index = eval('[' + re.sub('[\[\]]','',str(keep_index)) + ']')  # 数组扁平化
+            keep_index = eval('[' + re.sub('[\[\]]','',str(keep_index)) + ']')  # list flattening
         
         return keep_index
     
