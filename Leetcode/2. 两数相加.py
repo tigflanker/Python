@@ -8,8 +8,6 @@
 #         self.val = x
 #         self.next = None
 
-# 链表？算了先用list替代吧，哈
-
 class Solution:
     def addTwoNumbers(self, l1: List, l2: List) -> List:
         import re
