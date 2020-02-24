@@ -15,6 +15,17 @@ def Corr_Vif(
         ,figsize = (14, 10)
         ,rounds = 2
         ):
+        
+    '''
+    # Example:
+    from sklearn.datasets import load_breast_cancer
+        
+    datain_example = load_breast_cancer()
+    datain_example = pd.DataFrame(datain_example.data, columns=datain_example.feature_names)
+    
+    corr_df = Corr_Vif(datain_example, corr_plt_filter=0.95, figsize=(18,12))
+    corr_df = Corr_Vif(datain_example, corr_plt_filter=15, figsize=(18,12))    
+    '''
 
     # VIF(方差膨胀因子)
     _values = datain.values
@@ -50,15 +61,3 @@ def Corr_Vif(
         plt.show()
 
     return pd.merge(vif_list, corr_table, left_on='Var', right_index=True)
-
-if __name__ == '__main__':
-    # Example
-    from sklearn.datasets import load_breast_cancer
-        
-    datain_example = load_breast_cancer()
-    datain_example = pd.DataFrame(
-        datain_example.data, columns=datain_example.feature_names)
-    
-    corr_df = Corr_Vif(datain_example, corr_plt_filter=0.95, figsize=(18,12))
-    corr_df = Corr_Vif(datain_example, corr_plt_filter=15, figsize=(18,12))
-            

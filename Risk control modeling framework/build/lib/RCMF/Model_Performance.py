@@ -24,6 +24,12 @@ def Model_Performance(clf  # 输入模型
                       ,calc_list = ['pr','roc','ks']  # 需计算的项目列表，分别为：准召列表、ROC/AUC、KS、特征重要性、模型学习率['cut','pr','roc','ks','fi','lc']
                       ,calibration = {}  # calibration图，如{'Random Forest':clf_rf,'Logistic Regression':clf_lr}
                       ):
+                      
+    '''
+    # Example:
+    Model_Performance(clf_xgb, X_train, y_train, X_test, y_test, out_path = 'D:/xxx.xlsx', calibration = {'Random Forest':clf_rf,'XGboost':clf_xgb})
+    Model_Performance(clf_xgb, X_train, y_train, calc_list = ['pr', 'roc', 'ks', 'cut'])
+    '''
     
     # 4.1 切点排序及准召、F1-Score
     def PRTF(X = 'X_train', y = 'y_train', clf = 'clf'):
@@ -143,8 +149,3 @@ def Model_Performance(clf  # 输入模型
         
     # ref7：https://www.cnblogs.com/gasongjian/p/8159501.html
         
-if __name__ == '__main__':
-    # 测试  
-    Model_Performance(clf_xgb, X_train, y_train, X_test, y_test, out_path = 'D:/xxx.xlsx', calibration = {'Random Forest':clf_rf,'XGboost':clf_xgb})
-    Model_Performance(clf_xgb, X_train, y_train, X_test, y_test)
-    Model_Performance(clf_xgb, X_train, y_train)

@@ -12,14 +12,16 @@ from rcmf.PDO_Score import PDO_Score, PDO_Score_Convert
 from rcmf.Model_Performance import Model_Performance
 from rcmf.Data_Sampling import Data_Sampling
 from rcmf.Data_Distribution import Data_Distribution
+from rcmf.PSR_Crypto import PSR_Crypto
 
-__version__ = '1.0.4'
+__version__ = '1.0.6'
 
 __all__ = (
     Data_Explore,
 	Missing_Data_Impute, Dummy, calc_chi2, Chi2_Merge, Cut_Merge, Woe_Iv, Corr_Vif, psi, PSI, 
 	PDO_Score, PDO_Score_Convert,
 	Model_Performance,
-	Data_Sampling, Data_Distribution
+	Data_Sampling, Data_Distribution,
+    PSR_Crypto
 	)
 	

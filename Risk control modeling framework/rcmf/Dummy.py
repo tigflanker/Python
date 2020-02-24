@@ -11,6 +11,21 @@ def Dummy(datain
           ,drop_one = True  # 是否将首值"第0个映射"删除，以防模型特征共线性 
           ,drop_orig = True  # 是否删除数据集原始变量 
           ):
+          
+    '''
+    # Example:
+    datain_test = pd.read_csv('http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/titanic.txt')
+    
+    # 单序列dummy
+    dummy_mapping_df, dummy_mapping_dict = Dummy(datain_test, dummy_var = 'pclass')  
+    
+    # 数据集dummy
+    dummy_mapping_df, dummy_mapping_dict = Dummy(datain_test[['pclass','survived','age','sex']])  # dummy全集
+    dummy_mapping_df, dummy_mapping_dict = Dummy(datain_test, dummy_var = ['pclass','survived','age','sex'])  # dummy指定特征（字符数值均可）
+    
+    # 参数测试
+    dummy_mapping_df, dummy_mapping_dict = Dummy(datain_test, drop_orig=False, drop_one=False)
+    '''
     
     # 参数解析 
     if type(dummy_var) == str:
@@ -42,18 +57,3 @@ def Dummy(datain
             dummy_mapping_dict[dv] = dummy_mapping_dict[dv][1:]
                     
     return dummy_mapping_df, dummy_mapping_dict
-
-if __name__ == '__main__':
-    # 测试
-    datain_test = pd.read_csv('http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/titanic.txt')
-    
-    # 单序列dummy
-    dummy_mapping_df, dummy_mapping_dict = Dummy(datain_test, dummy_var = 'pclass')  
-    
-    # 数据集dummy
-    dummy_mapping_df, dummy_mapping_dict = Dummy(datain_test[['pclass','survived','age','sex']])  # dummy全集
-    dummy_mapping_df, dummy_mapping_dict = Dummy(datain_test, dummy_var = ['pclass','survived','age','sex'])  # dummy指定特征（字符数值均可）
-    
-    # 参数测试
-    dummy_mapping_df, dummy_mapping_dict = Dummy(datain_test, drop_orig=False, drop_one=False)
-    

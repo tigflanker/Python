@@ -14,9 +14,6 @@
 * 3个使用示例最好生成MD，增加可读性
 * 2.2.2 Chi2_merge.py：去除卡方分箱的“最优分箱组数”判定，添加卡方值阈值约束
 * 特征筛选：逐步回归
-
-## 下图为本工具箱的使用流程
-![Process](https://github.com/tigflanker/Python/blob/master/Risk%20control%20modeling%20framework/process.jpg)  
  
 ## 更新日志：
 # 29Dec2018
@@ -34,3 +31,8 @@
 * 2.x Collinearity.py：相关性计算部分的热力图展示，可以控制哪些特征用于绘图；例如可以abs(corr) > 0.8的特征，或者是按相关性排序后取前20个特征
 * 3.x PDO_Score_Convert.py：放活odds定义，如不定义，则按照如下规则计算：对train数据集计算ks切点，取切点的百分位点区间内的所有y_label，计算好坏比
 * RCMF使用说明：完成初版
+
+## 更新日志：
+# 10Jun2019 
+* 已为全部脚本更新help
+* 1. Data_Explore.py：更新计算方式，更新数值型特征的自定义分布，更新伪字符型变量（99%都是数值的字符型变量）分布探索

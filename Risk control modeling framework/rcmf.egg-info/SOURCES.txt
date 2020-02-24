@@ -11,6 +11,7 @@ rcmf/Missing_Data_Impute.py
 rcmf/Model_Performance.py
 rcmf/PDO_Score.py
 rcmf/PSI.py
+rcmf/PSR_Crypto.py
 rcmf/Woe_Iv.py
 rcmf/__init__.py
 rcmf.egg-info/PKG-INFO

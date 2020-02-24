@@ -7,19 +7,80 @@ import re
 import pandas as pd 
 import numpy as np
 
-# 1. 单纯抽样：全部数据按照一定比例或指定数量进行抽样：sample_rule = 100; sample_rule = 0.3
-# 2. 分层抽样：按照某个变量进行排序，按照等频分箱，每箱内抽取均匀样本量：stratify_by = ['age', 20] + sample_rule = 100 or 0.3
-# 3. 非均衡抽样：① 设定某个分组变量，对其包含值个数取最小，按此最小值对所有分组 1:1 抽样：sample_rule = 'align' + group_by = 'survived'  
-#              ② 指定规则分组抽样，按照分组变量的每个值设定规则（如：100、0.3、'max'）：sample_rule = {0:100, 1:'max'} + group_by = 'survived'
-#              ③ 非均衡 + 分层抽样：sample_rule = {0:100, 1:0.3} + group_by = 'survived' + stratify_by = ['age', 20]
-# 系数中若倍数大于1，或例数大于样本量本身，即为过采样 
-# 用法举例请参见最下方 
-
 def Data_Sampling(datain,
                   sample_rule = {},
                   stratify_by = [],
                   group_by = ''
                   ): 
+                  
+    '''
+    # 1. 单纯抽样：全部数据按照一定比例或指定数量进行抽样：sample_rule = 100; sample_rule = 0.3
+    # 2. 分层抽样：按照某个变量进行排序，按照等频分箱，每箱内抽取均匀样本量：stratify_by = ['age', 20] + sample_rule = 100 or 0.3
+    # 3. 非均衡抽样：① 设定某个分组变量，对其包含值个数取最小，按此最小值对所有分组 1:1 抽样：sample_rule = 'align' + group_by = 'survived'  
+    #              ② 指定规则分组抽样，按照分组变量的每个值设定规则（如：100、0.3、'max'）：sample_rule = {0:100, 1:'max'} + group_by = 'survived'
+    #              ③ 非均衡 + 分层抽样：sample_rule = {0:100, 1:0.3} + group_by = 'survived' + stratify_by = ['age', 20]
+    # 系数中若倍数大于1，或例数大于样本量本身，即为过采样 
+    
+    # 使用示例：
+    datain = pd.read_csv('http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/titanic.txt')
+    
+    #print(datain.describe())
+    #print(datain['survived'].value_counts())
+        
+    # 1. 简单抽样：sample_rule
+    sample_out = Data_Sampling(datain,
+                    sample_rule = 2.3,
+                    stratify_by = [],
+                    group_by = '')
+    
+    print(sample_out.describe())
+    print(sample_out['survived'].value_counts())
+    
+    # 1. 简单抽样：sample_rule
+    sample_out = Data_Sampling(datain,
+                    sample_rule = 2000,
+                    stratify_by = [],
+                    group_by = '')
+    
+    print(sample_out.describe())
+    print(sample_out['survived'].value_counts())
+    
+    # 2. 分层抽样：sample_rule + stratify_by
+    sample_out = Data_Sampling(datain,
+                    sample_rule = 2.3,
+                    stratify_by = ['age', 20],
+                    group_by = '')
+    
+    print(sample_out.describe())
+    print(sample_out['survived'].value_counts())
+    
+    # 3. 非均衡抽样：sample_rule + group_by
+    sample_out = Data_Sampling(datain,
+                    sample_rule = 'align',
+                    stratify_by = [],
+                    group_by = 'survived')
+    
+    print(sample_out.describe())
+    print(sample_out['survived'].value_counts())
+    
+    # 3. 非均衡抽样：sample_rule + group_by
+    sample_out = Data_Sampling(datain,
+                    sample_rule = {0:'max',1:4000},
+                    stratify_by = [],
+                    group_by = 'survived')
+    
+    print(sample_out.describe())
+    print(sample_out['survived'].value_counts())
+    
+    # 3. 非均衡抽样：sample_rule + group_by
+    sample_out = Data_Sampling(datain,
+                    sample_rule = {0:2.0,1:4000},
+                    stratify_by = ['age', 20],
+                    group_by = 'survived')
+    
+    print(sample_out.describe())
+    print(sample_out['survived'].value_counts())
+    '''
 
     # Copy to final output dataset. 
     sample_out = datain.copy()
@@ -140,63 +201,3 @@ def Data_Sampling(datain,
         
     return sample_out
     
-if __name__ == '__main__':
-    # 使用示例：
-    datain = pd.read_csv('http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/titanic.txt')
-    
-    #print(datain.describe())
-    #print(datain['survived'].value_counts())
-        
-    # 1. 简单抽样：sample_rule
-    sample_out = Data_Sampling(datain,
-                    sample_rule = 2.3,
-                    stratify_by = [],
-                    group_by = '')
-    
-    print(sample_out.describe())
-    print(sample_out['survived'].value_counts())
-    
-    # 1. 简单抽样：sample_rule
-    sample_out = Data_Sampling(datain,
-                    sample_rule = 2000,
-                    stratify_by = [],
-                    group_by = '')
-    
-    print(sample_out.describe())
-    print(sample_out['survived'].value_counts())
-    
-    # 2. 分层抽样：sample_rule + stratify_by
-    sample_out = Data_Sampling(datain,
-                    sample_rule = 2.3,
-                    stratify_by = ['age', 20],
-                    group_by = '')
-    
-    print(sample_out.describe())
-    print(sample_out['survived'].value_counts())
-    
-    # 3. 非均衡抽样：sample_rule + group_by
-    sample_out = Data_Sampling(datain,
-                    sample_rule = 'align',
-                    stratify_by = [],
-                    group_by = 'survived')
-    
-    print(sample_out.describe())
-    print(sample_out['survived'].value_counts())
-    
-    # 3. 非均衡抽样：sample_rule + group_by
-    sample_out = Data_Sampling(datain,
-                    sample_rule = {0:'max',1:4000},
-                    stratify_by = [],
-                    group_by = 'survived')
-    
-    print(sample_out.describe())
-    print(sample_out['survived'].value_counts())
-    
-    # 3. 非均衡抽样：sample_rule + group_by
-    sample_out = Data_Sampling(datain,
-                    sample_rule = {0:2.0,1:4000},
-                    stratify_by = ['age', 20],
-                    group_by = 'survived')
-    
-    print(sample_out.describe())
-    print(sample_out['survived'].value_counts())

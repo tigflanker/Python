@@ -29,13 +29,13 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='rcmf',  # Required
-    version='1.0.4',  # Required
+    version='1.0.6',  # Required
 
     description='A risk control modeling toolbox, include scattered function for building scorecard/machine learn model.',  # Optional
     long_description=long_description,  # Optional
     long_description_content_type='text/markdown',  # Optional (see note above)
 
-    url='https://github.com/tigflanker/Python/tree/master/Risk control modeling framework',  # Optional 
+    # url='https://github.com/tigflanker/Python/tree/master/Risk control modeling framework',  # Optional 
     author='Tigflanker & deng@jd partners',  # Optional
     author_email='tigflanker@qq.com',  # Optional
 
@@ -101,8 +101,8 @@ setup(
     # issues, where the source is hosted, where to say thanks to the package
     # maintainers, and where to support the project financially. The key is
     # what's used to render the link text on PyPI.
-    project_urls={  # Optional
-        'Source': 'https://github.com/tigflanker/Python/tree/master/Risk control modeling framework/',
-        # 'Say Thanks!': 'Thanks to my friends HuYao@jd & JiangChao@jd for their support of this project many times.',
-    },
+    # project_urls={  # Optional
+        # 'Source': 'https://github.com/tigflanker/Python/tree/master/Risk control modeling framework/',
+        # 'Say Thanks!': 'Thanks to my friends HuYao@jd & JiangChao@jd for their support on this project many times.',
+    # },
 ) 

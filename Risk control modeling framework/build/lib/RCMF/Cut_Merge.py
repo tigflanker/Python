@@ -16,6 +16,23 @@ def Cut_Merge(
         ,cut_n = 3  # 分箱数（等宽模式下如果出现空箱，则逐步缩箱）
         ,calc_woe = True  # 连带计算WoE-IV，数据集直接以WoE转化后输出
         ):
+        
+    '''
+    # Example:
+    datain_example = pd.read_csv('http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/titanic.txt')
+    
+    cut_df, fa_df = Cut_Merge(datain_example, cut_way = 'ew', cut_n = 10, cut_y = 'survived')
+        
+    # Example2:
+    from sklearn.datasets import load_breast_cancer
+    datain_example = load_breast_cancer()
+    
+    data_part = pd.DataFrame(datain_example.data, columns=datain_example.feature_names)
+    flag_part = pd.Series(datain_example.target, name='y_var')
+    
+    datain_example = pd.concat([flag_part, data_part], axis=1)
+    cut_df, fa_df = Cut_Merge(datain_example, cut_way = 'ef', cut_n = 10, cut_y = 'y_var')
+    '''
     
     # 必须重置index
     datain = datain.reset_index(drop = True)
@@ -173,31 +190,4 @@ def Cut_Merge(
         cut_df = pd.merge(cut_df.drop(list(wi_dataout.columns), axis = 1), wi_dataout, left_index = True, right_index = True)
 
     return cut_df, fa_df
-    
-if __name__ == '__main__':
-    # 使用
-    datain_example = pd.read_csv('http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/titanic.txt')
-    
-    #cut_df, cut_divide_rule, fa_df = Cut_Merge(datain_example['age'], cut_way = 'ef', cut_n = 5)
-    cut_df, fa_df = Cut_Merge(datain_example, cut_way = 'ew', cut_n = 10, cut_y = 'survived')
-    
-    import time
-    start = time.clock()
-    cut_df, fa_df = Cut_Merge(datain_example, cut_way = 'ew', cut_n = 10, cut_y = 'survived')
-    end = time.clock()
-    
-    print (end-start)
-    
-    # 测试
-    from sklearn.datasets import load_breast_cancer
-    datain_example = load_breast_cancer()
-    
-    data_part = pd.DataFrame(datain_example.data, columns=datain_example.feature_names)
-    flag_part = pd.Series(datain_example.target, name='y_var')
-    
-    datain_example = pd.concat([flag_part, data_part], axis=1)
-    cut_df, fa_df = Cut_Merge(datain_example, cut_way = 'ef', cut_n = 10, cut_y = 'y_var')
-    
-    datain_c = pd.read_csv('D:/Desktop/for_test.csv',sep=',',encoding='utf-8',engine='python')
-    cut_df, fa_df = Cut_Merge(datain_c, cut_way = 'ef', cut_n = 10, cut_y = 'y_tag')
     

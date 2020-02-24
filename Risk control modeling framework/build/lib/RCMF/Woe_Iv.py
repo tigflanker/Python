@@ -10,6 +10,27 @@ import math
 
 # 2.3.1 WOE-IV
 def Woe_Iv(datain, fa_df):
+
+    '''
+    # Example 
+    
+    # 数据读入
+    # 1. 使用乳腺癌预测数据集 
+    from sklearn.datasets import load_breast_cancer
+    datain_example = load_breast_cancer()
+    data_part = pd.DataFrame(datain_example.data, columns=datain_example.feature_names)
+    flag_part = pd.Series(datain_example.target, name='y_var')
+    datain_example = pd.concat([flag_part, data_part], axis=1)
+    
+    # 2. 使用泰坦尼克号数据 
+    datain_example = pd.read_csv('http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/titanic.txt')
+    
+    # 分箱计算
+    cut_df, fa_df = Cut_Merge(datain_example, cut_way = 'ef', cut_n = 5, cut_y = 'y_var')
+    
+    # 测试
+    wi_dataout, woe_dict, fa_df = Woe_Iv(cut_df, y_var = 'y_var', fa_df = fa_df)
+    '''
     
     # 计算好坏总数
     _sum_set = fa_df.groupby('Var').agg({'bads':sum, 'N':sum}).rename(columns={'bads':'bads_sum','N':'N_sum'})
@@ -41,22 +62,3 @@ def Woe_Iv(datain, fa_df):
     
     # 2.3.1.5 收尾（结果update，输出）
     return wi_dataout, woe_dict, fa_df
-
-if __name__ == '__main__':
-    # 使用 
-    
-    # 1. 使用乳腺癌预测数据集 
-    # 需调用cut_merge方法对数据集先行分箱 
-    from sklearn.datasets import load_breast_cancer
-    datain_example = load_breast_cancer()
-    data_part = pd.DataFrame(datain_example.data, columns=datain_example.feature_names)
-    flag_part = pd.Series(datain_example.target, name='y_var')
-    datain_example = pd.concat([flag_part, data_part], axis=1)
-    
-    # 2. 使用泰坦尼克号数据 
-    datain_example = pd.read_csv('http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/titanic.txt')
-    
-    cut_df, fa_df = Cut_Merge(sample_out, cut_way = 'ef', cut_n = 5, cut_y = 'survived')
-    
-    # 测试
-    wi_dataout, woe_dict, fa_df = Woe_Iv(cut_df, y_var = 'y_var', fa_df = fa_df)
