@@ -1,6 +1,6 @@
 ﻿# Risk control modeling framework（风控建模工具集）
  
-## 声明：工具箱为风控建模过程提供支持，因工作紧迫暂于23Feb19停更；感谢jiangchao8@jd & huyao3@jd为这些积累提供若干支持
+## 声明：工具箱为风控建模过程提供支持，因工作紧迫暂于23Feb19停更
 
 ## 最新Note：
 * 整个工具箱已做完re-view：包括每个模块其他语言的double-check、每个模块参数名称标准化
