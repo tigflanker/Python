@@ -6,7 +6,7 @@
 * 整个工具箱已做完re-view：包括每个模块其他语言的double-check、每个模块参数名称标准化
 * 2.2.2 Chi2_merge.py模块可以使用，但还需修改
 * Example.x为测试实例，可参照（！！实际项目中的特征名和数据等保密信息已做处理！！）
-* Pypi:https://pypi.org/project/rcmf/
+* Pypi:pip install rcmf 
 
 ## 需更新：
 * 特征筛选部分没有落地，仍在整理中，包括：集成模型筛选方法、逻辑回归L1正则化
